@@ -1,6 +1,8 @@
 async function fetchData(endpoint) {
     try {
-        const response = await fetch(`https://jotihunt.nl/api/2.0/${endpoint}`);
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const targetUrl = `https://jotihunt.nl/api/2.0/${endpoint}`;
+        const response = await fetch(proxyUrl + targetUrl);
         const data = await response.json();
         displayData(endpoint, data.data);
     } catch (error) {
@@ -46,3 +48,4 @@ function displayArticles(articles) {
         articlesDiv.appendChild(articleDiv);
     });
 }
+
