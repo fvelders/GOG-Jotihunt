@@ -67,21 +67,38 @@ async function fetchData(endpoint) {
   
       subscriptionsDiv.appendChild(subscriptionDiv);
     });
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const username = document.getElementById('login-username').value;
-        const password = document.getElementById('login-password').value;
-      
-        if (username === 'admin' && password === 'admin') {
-          showPage('mainPage');
-          fetchData('subscriptions');
-          fetchData('areas');
-          fetchData('articles');
-        } else {
-          alert('Onjuiste gebruikersnaam of wachtwoord');
-        }
-      });  
 
+  // Inlogfunctie
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
+
+  if (username === 'admin' && password === 'admin') {
+    // Verberg inlogpagina en toon homepagina
+    showPage('mainPage');
+    showSubpage('homePage');
+    fetchData('subscriptions');
+    fetchData('areas');
+    fetchData('articles');
+  } else {
+    alert('Onjuiste gebruikersnaam of wachtwoord');
+  }
+});
+
+// Functie om pagina's te tonen
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.style.display = 'none');
+  document.getElementById(pageId).style.display = 'block';
+}
+
+// Functie om subpagina's te tonen
+function showSubpage(subpageId) {
+  const subpages = document.querySelectorAll('.subpage');
+  subpages.forEach(subpage => subpage.style.display = 'none');
+  document.getElementById(subpageId).style.display = 'block';
+}
 }
 
   function showPage(pageId) {
