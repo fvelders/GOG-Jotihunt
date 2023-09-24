@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jotihunt Webapp</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Inlogscherm -->
+        <div id="login-container">
+            <form id="loginForm">
+                <input type="text" id="login-username" placeholder="Gebruikersnaam" required>
+                <input type="password" id="login-password" placeholder="Wachtwoord" required>
+                <button type="submit">Inloggen</button>
+            </form>
+            <form id="registerForm">
+                <input type="text" id="register-username" placeholder="Gebruikersnaam" required>
+                <input type="password" id="register-password" placeholder="Wachtwoord" required>
+                <input type="password" id="confirm-password" placeholder="Bevestig wachtwoord" required>
+                <button type="submit">Registreren</button>
+            </form>
+        </div>
+
+        <!-- Hoofdmenu -->
+        <div id="mainMenu">
+            <button onclick="showPage('home')">Home</button>
+            <button onclick="showPage('map')">Kaart</button>
+            <button onclick="showPage('status')">Status Vossenteams</button>
+            <button onclick="showPage('account')">Account</button>
+        </div>
+
+        <!-- Pagina's -->
+        <div id="pages">
+            <div id="home" class="page">
+                <!-- Homepagina inhoud hier -->
+            </div>
+            <div id="map" class="page">
+                <!-- Kaart inhoud hier -->
+            </div>
+            <div id="status" class="page">
+                <!-- Status Vossenteams inhoud hier -->
+            </div>
+            <div id="account" class="page">
+                <!-- Account inhoud hier -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
