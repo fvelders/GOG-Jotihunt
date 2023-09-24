@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Jotihunt Webapp</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
+    <script src="scripts.js" defer></script> <!-- Let op: het is nu 'scripts.js' -->
 </head>
 <body>
     <div id="app">
         <!-- Inlogscherm -->
-        <div id="login-container">
+        <div id="loginPage" class="page">
             <form id="loginForm">
                 <input type="text" id="login-username" placeholder="Gebruikersnaam" required>
                 <input type="password" id="login-password" placeholder="Wachtwoord" required>
@@ -24,25 +24,25 @@
         </div>
 
         <!-- Hoofdmenu -->
-        <div id="mainMenu">
-            <button onclick="showPage('home')">Home</button>
+        <div id="mainMenu" style="display:none;">
+            <button onclick="showPage('homePage')">Home</button>
             <button onclick="showPage('map')">Kaart</button>
             <button onclick="showPage('status')">Status Vossenteams</button>
             <button onclick="showPage('account')">Account</button>
         </div>
 
         <!-- Pagina's -->
-        <div id="pages">
-            <div id="home" class="page">
-                <!-- Homepagina inhoud hier -->
+        <div id="mainPage" class="page" style="display:none;">
+            <div id="homePage" class="subpage">
+                <div id="articles"></div>
             </div>
-            <div id="map" class="page">
+            <div id="map" class="subpage" style="display:none;">
                 <!-- Kaart inhoud hier -->
             </div>
-            <div id="status" class="page">
+            <div id="status" class="subpage" style="display:none;">
                 <!-- Status Vossenteams inhoud hier -->
             </div>
-            <div id="account" class="page">
+            <div id="account" class="subpage" style="display:none;">
                 <!-- Account inhoud hier -->
             </div>
         </div>
