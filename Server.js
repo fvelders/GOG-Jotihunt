@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host: '192.168.2.23',
+    host: 'http://192-168-2-23.fvelders.direct.quickconnect.to/phpMyAdmin/index.php',
     user: 'root',
     password: 'RensaFamily2023!',
     database: 'Users'
