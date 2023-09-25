@@ -1,31 +1,61 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const bcrypt = require('bcrypt');
 
 const app = express();
+app.use(express.json());
 
-// Middleware
-app.use(bodyParser.json());
-app.use(express.static('public')); // serveer statische bestanden uit de 'public' map
-
-// Simpele gebruikersdatabase (voor demonstratiedoeleinden)
-const users = [
-  { username: 'admin', password: 'admin', role: 'admin' },
-  { username: 'user', password: 'user', role: 'user' }
-];
-
-// Inlogroute
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  const user = users.find(u => u.username === username && u.password === password);
-  if (user) {
-    res.json({ success: true, role: user.role });
-  } else {
-    res.json({ success: false });
-  }
+const db = mysql.createConnection({
+    host: '192.168.2.23',
+    user: 'root',
+    password: 'RensaFamily2023!',
+    database: 'Users'
 });
 
-// Start de server
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server draait op http://localhost:${port}`);
+db.connect(err => {
+    if (err) throw err;
+    console.log('Database verbonden');
+});
+
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const query = 'INSERT INTO users (username, password) VALUES (?, ?)';
+    db.query(query, [username, hashedPassword], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Serverfout');
+        }
+        res.status(201).send('Gebruiker geregistreerd');
+    });
+});
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    const query = 'SELECT password FROM users WHERE username = ?';
+    db.query(query, [username], async (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Serverfout');
+        }
+
+        if (result.length === 0) {
+            return res.status(401).send('Onjuiste gebruikersnaam of wachtwoord');
+        }
+
+        const hashedPassword = result[0].password;
+        const match = await bcrypt.compare(password, hashedPassword);
+
+        if (match) {
+            res.status(200).send('Inloggen succesvol');
+        } else {
+            res.status(401).send('Onjuiste gebruikersnaam of wachtwoord');
+        }
+    });
+});
+
+app.listen(3000, () => {
+    console.log('Server draait op http://localhost:3000');
 });
