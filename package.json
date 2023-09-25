@@ -1,0 +1,13 @@
+{
+  "name": "jotihunt-gog",
+  "version": "1.0.0",
+  "description": "Webapp voor GOG voor het gebruik van de api",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
